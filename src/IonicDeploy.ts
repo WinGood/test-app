@@ -48,7 +48,8 @@ export class IonicDeploy {
   extract(onProgress) {
     this.runningOnlyInCordovaEnv();
     return new Promise((resolve, reject) => {
-      IonicCordova.deploy.extract(percent => {
+      IonicCordova.deploy.extract(result => {
+        const percent = (result === 'done') ? 100 : result;
         onProgress(percent);
         if (percent === 100) resolve();
       }, err => {
