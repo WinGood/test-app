@@ -59,7 +59,25 @@ export class IonicDeploy {
 
   load() {
     return new Promise((resolve, reject) => {
-      IonicCordova.deploy.redirect(result => resolve(true), err => reject(err));
+      IonicCordova.deploy.redirect(() => resolve(true), err => reject(err));
+    });
+  }
+
+  info() {
+    return new Promise((resolve, reject) => {
+      IonicCordova.deploy.info(result => resolve(result), err => reject(err));
+    });
+  }
+
+  getVersions() {
+    return new Promise((resolve, reject) => {
+      IonicCordova.deploy.getVersions(result => resolve(result), err => reject(err));
+    });
+  }
+
+  deleteVersion(uuid) {
+    return new Promise((resolve, reject) => {
+      IonicCordova.deploy.deleteVersion(uuid, () => resolve(true), err => reject(err));
     });
   }
 
