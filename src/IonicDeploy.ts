@@ -13,6 +13,7 @@ export class IonicDeploy {
     this.isCordovaEnv = platform.is('cordova');
   }
 
+  // TODO make as opts object
   get channel(): string {
     return this._channel;
   }
