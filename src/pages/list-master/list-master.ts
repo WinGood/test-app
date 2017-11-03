@@ -85,7 +85,7 @@ export class ListMasterPage {
       if (this.runningDeploy) return;
 
       // this.ionicDeploy.getVersions()
-      //   .then(result => {
+      //   .then((result: any) => {
       //     console.log('getVersions', result);
       //     if (result && result.length) {
       //       const promises = result.map(version => this.ionicDeploy.deleteVersion(version));
@@ -98,7 +98,7 @@ export class ListMasterPage {
       //         });
       //     }
       //   });
-      //
+
 
       this.ionicDeploy.info()
         .then(result => {
@@ -119,13 +119,19 @@ export class ListMasterPage {
             toast.present();
             this.runningDeploy = true;
             return this.ionicDeploy.download(percent => {
-              toast.setMessage('Downloading .. ' + percent + '%');
+              console.log('percent download', percent);
+              this.zone.run(() => {
+                toast.setMessage('Downloading .. ' + percent + '%');
+              });
             });
           }
         })
         .then(() => {
           return this.ionicDeploy.extract(percent => {
-            toast.setMessage('Extracting .. ' + percent + '%');
+            console.log('percent extract', percent);
+              this.zone.run(() => {
+                toast.setMessage('Extracting .. ' + percent + '%');
+              });
           });
         })
         .then(() => this.ionicDeploy.load())

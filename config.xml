@@ -82,11 +82,13 @@
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.11" />
     <engine name="ios" spec="~4.4.0" />
+    <allow-navigation href="http://192.168.1.64:8100" />
     <plugin name="cordova-plugin-ionic" spec="^2.0.3">
         <variable name="APP_ID" value="0f468111" />
         <variable name="CHANNEL_NAME" value="Production" />
         <variable name="UPDATE_METHOD" value="none" />
+        <variable name="MAX_VERSIONS" value="0" />
+        <variable name="MAX_STORE" value="0" />
         <variable name="UPDATE_API" value="https://api.ionicjs.com" />
-        <variable name="MAX_STORE" value="2" />
     </plugin>
 </widget>
