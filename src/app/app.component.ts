@@ -7,6 +7,8 @@ import { Config, Nav, Platform } from 'ionic-angular';
 import { FirstRunPage } from '../pages/pages';
 import { Settings } from '../providers/providers';
 
+declare var IonicCordova;
+
 @Component({
   template: `<ion-menu [content]="content">
     <ion-header>
