@@ -91,7 +91,8 @@ export class ListMasterPage {
         closeButtonText: 'Cancel'
       });
 
-      this.ionicDeploy.setChannel(channelName)
+      this.ionicDeploy.channel = channelName;
+      this.ionicDeploy.init()
         .then(() => this.ionicDeploy.check())
         .then(snapshotAvailable => {
           if (snapshotAvailable) {
