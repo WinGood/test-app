@@ -118,28 +118,18 @@ export class ListMasterPage {
           if (snapshotAvailable) {
             toast.present();
             this.runningDeploy = true;
-            return this.ionicDeploy.download(percent => {
-              console.log('percent download', percent);
-              toast.setMessage('Downloading .. ' + percent + '%');
-            });
+            return this.ionicDeploy.download(percent => toast.setMessage('Downloading .. ' + percent + '%'));
           }
         })
-        .then(() => {
-          return this.ionicDeploy.extract(percent => {
-            console.log('percent extract', percent);
-            toast.setMessage('Extracting .. ' + percent + '%');
-          });
-        })
+        .then(() => this.ionicDeploy.extract(percent => toast.setMessage('Extracting .. ' + percent + '%')))
         .then(() => this.ionicDeploy.load())
         .then(() => toast.dismiss())
         .then(() => this.runningDeploy = false)
         .catch(() => {
           console.log('catch');
           this.runningDeploy = false;
-          this.zone.run(() => {
-            toast.setMessage('Sorry there was network problem, we will try' +
+          toast.setMessage('Sorry there was network problem, we will try' +
               ' again next time the app loads!');
-          });
         });
     }
   }
