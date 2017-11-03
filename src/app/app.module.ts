@@ -8,6 +8,7 @@ import { IonicStorageModule, Storage } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { Deeplinks } from '@ionic-native/deeplinks';
 
 import { Items } from '../mocks/providers/items';
 import { Settings } from '../providers/providers';
@@ -66,6 +67,7 @@ export function provideSettings(storage: Storage) {
     SplashScreen,
     StatusBar,
     IonicDeploy,
+    Deeplinks,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }
