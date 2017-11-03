@@ -36,10 +36,10 @@ export class IonicDeploy {
   download(onProgress) {
     this.runningOnlyInCordovaEnv();
     return new Promise((resolve, reject) => {
-      IonicCordova.deploy.download(percent => {
-        reject(false);
-        // this.zone.run(() => onProgress(percent));
-        // if (percent === 100) resolve();
+      IonicCordova.deploy.download(result => {
+        const percent = (result === true || result === 100) ? 100 : result;
+        this.zone.run(() => onProgress(percent));
+        if (percent === 100) resolve();
       }, err => {
         reject(err);
       });

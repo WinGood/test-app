@@ -84,27 +84,6 @@ export class ListMasterPage {
     if (this.platform.is('cordova')) {
       if (this.runningDeploy) return;
 
-      // this.ionicDeploy.getVersions()
-      //   .then((result: any) => {
-      //     console.log('getVersions', result);
-      //     if (result && result.length) {
-      //       const promises = result.map(version => this.ionicDeploy.deleteVersion(version));
-      //       Promise.all(promises)
-      //         .then(result => {
-      //           console.log('all versions has been deleted', result);
-      //         })
-      //         .catch(err => {
-      //           console.log('error has occured', err);
-      //         });
-      //     }
-      //   });
-
-
-      this.ionicDeploy.info()
-        .then(result => {
-          console.log('info', result);
-        });
-
       let toast = this.toastCtrl.create({
         message: 'Downloading .. 0%',
         position: 'bottom',
@@ -126,7 +105,6 @@ export class ListMasterPage {
         .then(() => toast.dismiss())
         .then(() => this.runningDeploy = false)
         .catch(() => {
-          console.log('catch');
           this.runningDeploy = false;
           toast.setMessage('Sorry there was network problem, we will try' +
               ' again next time the app loads!');
