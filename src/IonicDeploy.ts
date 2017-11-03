@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Platform } from 'ionic-angular';
 
 declare var IonicCordova;
@@ -8,7 +8,7 @@ export class IonicDeploy {
   private channel: string = 'Development';
   private isCordovaEnv: boolean = false;
 
-  constructor(private platform: Platform) {
+  constructor(private platform: Platform, private zone: NgZone) {
     this.isCordovaEnv = platform.is('cordova');
   }
 
@@ -37,7 +37,7 @@ export class IonicDeploy {
     this.runningOnlyInCordovaEnv();
     return new Promise((resolve, reject) => {
       IonicCordova.deploy.download(percent => {
-        onProgress(percent);
+        this.zone.run(() => onProgress(percent));
         if (percent === 100) resolve();
       }, err => {
         reject(err);
@@ -50,7 +50,7 @@ export class IonicDeploy {
     return new Promise((resolve, reject) => {
       IonicCordova.deploy.extract(result => {
         const percent = (result === 'done') ? 100 : result;
-        onProgress(percent);
+        this.zone.run(() => onProgress(percent));
         if (percent === 100) resolve();
       }, err => {
         reject(err);

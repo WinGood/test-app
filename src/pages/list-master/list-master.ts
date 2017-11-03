@@ -120,18 +120,14 @@ export class ListMasterPage {
             this.runningDeploy = true;
             return this.ionicDeploy.download(percent => {
               console.log('percent download', percent);
-              this.zone.run(() => {
-                toast.setMessage('Downloading .. ' + percent + '%');
-              });
+              toast.setMessage('Downloading .. ' + percent + '%');
             });
           }
         })
         .then(() => {
           return this.ionicDeploy.extract(percent => {
             console.log('percent extract', percent);
-              this.zone.run(() => {
-                toast.setMessage('Extracting .. ' + percent + '%');
-              });
+            toast.setMessage('Extracting .. ' + percent + '%');
           });
         })
         .then(() => this.ionicDeploy.load())
@@ -140,8 +136,10 @@ export class ListMasterPage {
         .catch(() => {
           console.log('catch');
           this.runningDeploy = false;
-          toast.setMessage('Sorry there was network problem, we will try' +
-            ' again next time the app loads!');
+          this.zone.run(() => {
+            toast.setMessage('Sorry there was network problem, we will try' +
+              ' again next time the app loads!');
+          });
         });
     }
   }
