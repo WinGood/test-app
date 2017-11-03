@@ -13,6 +13,7 @@ import { Items } from '../mocks/providers/items';
 import { Settings } from '../providers/providers';
 import { User } from '../providers/providers';
 import { Api } from '../providers/providers';
+import { IonicDeploy } from '../IonicDeploy';
 import { MyApp } from './app.component';
 
 // The translate loader needs to know where to load i18n files
@@ -64,6 +65,7 @@ export function provideSettings(storage: Storage) {
     Camera,
     SplashScreen,
     StatusBar,
+    IonicDeploy,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }
