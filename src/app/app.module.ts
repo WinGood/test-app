@@ -9,6 +9,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { Deeplinks } from '@ionic-native/deeplinks';
+import { Pro } from '@ionic/pro';
 
 import { Items } from '../mocks/providers/items';
 import { Settings } from '../providers/providers';
@@ -16,6 +17,16 @@ import { User } from '../providers/providers';
 import { Api } from '../providers/providers';
 import { IonicDeploy } from '../IonicDeploy';
 import { MyApp } from './app.component';
+
+const IonicPro = Pro.init('6d3cb31d', {
+  appVersion: '0.0.3'
+});
+
+export class MyErrorHandler implements ErrorHandler {
+  handleError(err: any): void {
+    IonicPro.monitoring.handleNewError(err);
+  }
+}
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -70,7 +81,7 @@ export function provideSettings(storage: Storage) {
     Deeplinks,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: MyErrorHandler }
   ]
 })
 export class AppModule { }

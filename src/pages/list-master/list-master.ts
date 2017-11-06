@@ -1,5 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, ModalController, NavController, ActionSheetController, Platform, ToastController } from 'ionic-angular';
+import { Pro } from '@ionic/pro';
 
 import { Item } from '../../models/item';
 import { Items } from '../../providers/providers';
@@ -81,6 +82,10 @@ export class ListMasterPage {
   }
   
   private changeDeplayChannel(channelName: string) {
+    Pro.getApp().monitoring.exception(new Error('test error'), {level: 'error'});
+    Pro.getApp().monitoring.log('This happens sometimes', { level: 'error' });
+    console.error('some error log');
+
     if (this.platform.is('cordova')) {
       if (this.runningDeploy) return;
 
